@@ -39,4 +39,4 @@ Controlify is a programm to controll your Spotify Session via Voice Commands. It
       --model needs a .pbmm file
       --scorer needs a .scorer file
       -d needs the ID number of the Microphone oyu are using. To find out your ID you can run the WhichAudioInputDevices.py to see all devices with IDs.
->>>>>>> dc9550b873337e1072040767d837376bdfe6c8d3
+
