@@ -29,6 +29,26 @@ Controlify is a programm to controll your Spotify Session via Voice Commands. It
       https://github.com/mozilla/DeepSpeech/releases/download/v0.8.1/deepspeech-0.8.1-models.pbmm
 
       https://github.com/mozilla/DeepSpeech/releases/download/v0.8.1/deepspeech-0.8.1-models.scorer
+      
+    You also have to Connect the App with your Spotify Account. For that visit Spotify Developer.
+      
+      https://developer.spotify.com/dashboard/login
+      
+    You have to Login there with your personnal Spotify Account. Then you have to created a App. After createing an App you will find a 
+      
+      client_id 
+      
+    and a 
+      
+      clint_secret
+      
+    in the top left of the Website. Add these Keys to a "Controlify_Config" in the following design.
+    
+      {
+        "client_id": "here_is_your_client_id",
+        "client_secret": "here_is_your_client_secret"
+      }
+    
 
    Run:
 
