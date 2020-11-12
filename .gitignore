@@ -1,0 +1,8 @@
+Controlify_Config
+.cache-*
+Scripts
+.idea/
+__pycache__/
+venv/
+deepspeech-0.8.1-models.pbmm
+deepspeech-0.8.1-models.scorer
