@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+Controlify
 =======
-# Controlify
 
 Controlify is a programm to controll your Spotify Session via Voice Commands. It uses Deepspeech moduls to translate your speech to text.
 
