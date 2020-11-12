@@ -212,7 +212,7 @@ def main(ARGS):
                     sp.pause_playback()
                 elif text == 'play' or text == 'start':
                     sp.start_playback()
-                elif text == 'names':
+                elif text == 'names' or text == 'name':
                     sp.play_all_playlist_names()
                 else:
                     zahl = is_number(text)
