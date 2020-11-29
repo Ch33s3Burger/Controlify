@@ -3,6 +3,8 @@ Controlify
 
 Controlify is a programm to controll your Spotify Session via Voice Commands. It uses Deepspeech moduls to translate your speech to text.
 
+If your Spotify is closed the programm will automatically start Spotify. 
+
   <h3>The Commands are:</h3>
 
     next : for the next Song in Queue
@@ -12,11 +14,6 @@ Controlify is a programm to controll your Spotify Session via Voice Commands. It
     start/play : for playing the currently selected Song
 
     stop/pause : for stopping the currently selected Song
-
-    names/name : Outputs all playlists with a number from which you follow via voice output
-
-    <number> : adds the Playlist with the number that was given to them via names/name in the Queue
-
 
   <h3>Installation:</h3>
 
@@ -47,6 +44,7 @@ Controlify is a programm to controll your Spotify Session via Voice Commands. It
     {
       "client_id": "here_is_your_client_id",
       "client_secret": "here_is_your_client_secret"
+      "spotify_home_url": "here/is/the/url/to/your/spotify.exe"
     }
     
 
