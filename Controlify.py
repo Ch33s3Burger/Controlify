@@ -44,20 +44,35 @@ def get_device_id():
         return sp.devices()['devices'][0]['id']
 
 
-def clear_queue():
-    sp.shuffle(get_device_id())
+def start_playback():
+    if is_active():
+        if sp.currently_playing() is None:
+            sp.add_to_queue(sp.current_user_recently_played()['items'][0]['track']['uri'], get_device_id())
+            sp.start_playback(get_device_id())
+        else:
+            if not sp.currently_playing()['is_playing']:
+                sp.start_playback(get_device_id())
+
+
+def pause_playback():
+    if is_active():
+        if sp.currently_playing() is None:
+            print('Nothing to stop!')
+        else:
+            if sp.currently_playing()['is_playing']:
+                sp.pause_playback(get_device_id())
 
 
 def next_track():
     sp.next_track(get_device_id())
 
 
-def set_volume(percentage):
-    sp.volume(percentage, get_device_id())
-
-
 def previous_track():
     sp.previous_track(get_device_id())
+
+
+def set_volume(percentage):
+    sp.volume(percentage, get_device_id())
 
 
 def is_active():
@@ -78,21 +93,6 @@ def open_spotify():
         else:
             return
 
-
-def pause_playback():
-    if is_active():
-        if sp.currently_playing()['is_playing']:
-            sp.pause_playback(get_device_id())
-
-
-def start_playback():
-    if is_active():
-        if sp.currently_playing() is None:
-            sp.add_to_queue(sp.current_user_recently_played()['items'][0]['track']['uri'], get_device_id())
-            sp.start_playback(get_device_id())
-        else:
-            if not sp.currently_playing()['is_playing']:
-                sp.start_playback(get_device_id())
 
 
 username = "9J9BwPhlT96qBagKnJUu7w"

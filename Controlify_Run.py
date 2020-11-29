@@ -217,8 +217,6 @@ def main(ARGS):
                     number = is_number(str.split(text, ' ')[3])
                     if 0 <= number <= 100:
                         sp.set_volume(number)
-                elif text == 'clear queue':
-                    sp.clear_queue()
             except Exception as ex:
                 print('Something went wrong: ', ex)
             if ARGS.keyboard:
