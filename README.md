@@ -14,6 +14,8 @@ If your Spotify is closed the programm will automatically start Spotify.
     start/play : for playing the currently selected Song
 
     stop/pause : for stopping the currently selected Song
+    
+    volume to <number> : sets the volume to the number you said (0<=number<=100)
 
   <h3>Installation:</h3>
 
