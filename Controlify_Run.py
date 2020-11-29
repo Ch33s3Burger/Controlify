@@ -203,6 +203,7 @@ def main(ARGS):
                     os.path.join(ARGS.savewav, datetime.now().strftime("savewav_%Y-%m-%d_%H-%M-%S_%f.wav")), wav_data)
                 wav_data = bytearray()
             text = stream_context.finishStream()
+            print('said: ' + text)
             try:
                 if text == 'next':
                     sp.next_track()
@@ -212,16 +213,14 @@ def main(ARGS):
                     sp.pause_playback()
                 elif text == 'play' or text == 'start':
                     sp.start_playback()
-                elif text == 'names' or text == 'name':
-                    sp.play_all_playlist_names()
-                else:
-                    zahl = is_number(text)
-                    if zahl != -1:
-                        sp.playlist_selected(zahl)
-                    else:
-                        print('said: ' + text)
+                elif str.startswith(text, 'volume to'):
+                    number = is_number(str.split(text, ' ')[3])
+                    if 0 <= number <= 100:
+                        sp.set_volume(number)
+                elif text == 'clear queue':
+                    sp.clear_queue()
             except Exception as ex:
-                print('Something went wrong', ex)
+                print('Something went wrong: ', ex)
             if ARGS.keyboard:
                 from pyautogui import typewrite
                 typewrite(text)
