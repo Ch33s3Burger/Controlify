@@ -4,6 +4,5 @@ Scripts
 .idea/
 __pycache__/
 venv/
-deepspeech-0.8.1-models.pbmm
-deepspeech-0.8.1-models.scorer
-/output_graph.pbmm
+*.pbmm
+*.scorer
