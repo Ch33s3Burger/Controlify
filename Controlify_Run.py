@@ -14,7 +14,7 @@ from halo import Halo
 from scipy import signal
 from word2number import w2n
 
-import Controlify as sp
+from controller.spotify import Controlify as sp
 
 logging.basicConfig(level=20)
 

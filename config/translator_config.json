@@ -1,0 +1,26 @@
+{
+  "play": {
+    "command": "start_playback()",
+    "music": {
+      "command": "start_playback()"
+    }
+  },
+  "stop": {
+    "command": "pause_playback()",
+    "music": {
+      "command": "pause_playback()"
+    }
+  },
+  "next": {
+    "command": "next_track()",
+    "song": {
+      "command": "next_track()"
+    }
+  },
+  "previous": {
+    "command": "previous_track()",
+    "song": {
+      "command": "previous_track()"
+    }
+  }
+}
