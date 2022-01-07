@@ -14,7 +14,7 @@ from halo import Halo
 from scipy import signal
 from word2number import w2n
 
-from controller.spotify import Controlify as sp
+from Translator import Translator
 
 logging.basicConfig(level=20)
 
@@ -183,6 +183,8 @@ def main(ARGS):
     print("Listening (ctrl-C to exit)...")
     frames = vad_audio.vad_collector()
 
+    translator = Translator()
+
     # Stream from microphone to DeepSpeech using VAD
     spinner = None
     if not ARGS.nospinner:
@@ -204,21 +206,7 @@ def main(ARGS):
                 wav_data = bytearray()
             text = stream_context.finishStream()
             print('said: ' + text)
-            try:
-                if text == 'next':
-                    sp.next_track()
-                elif text == 'previous':
-                    sp.previous_track()
-                elif text == 'stop' or text == 'pause':
-                    sp.pause_playback()
-                elif text == 'play' or text == 'start':
-                    sp.start_playback()
-                elif str.startswith(text, 'volume to'):
-                    number = is_number(str.split(text, ' ')[3])
-                    if 0 <= number <= 100:
-                        sp.set_volume(number)
-            except Exception as ex:
-                print('Something went wrong: ', ex)
+            translator.evaluate_text(text)
             if ARGS.keyboard:
                 from pyautogui import typewrite
                 typewrite(text)
