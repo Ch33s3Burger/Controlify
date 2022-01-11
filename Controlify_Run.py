@@ -161,6 +161,14 @@ class VADAudio(Audio):
                     ring_buffer.clear()
 
 
+def get_device_id_by_name(name):
+    p = pyaudio.PyAudio()
+    for i in range(p.get_device_count()):
+        device_info = p.get_device_info_by_index(i)
+        if name in device_info['name'] and device_info['maxInputChannels'] > 0:
+            return i
+
+
 def main(ARGS):
     # Load DeepSpeech model
     if os.path.isdir(ARGS.model):
@@ -174,6 +182,14 @@ def main(ARGS):
     if ARGS.scorer:
         logging.info("ARGS.scorer: %s", ARGS.scorer)
         model.enableExternalScorer(ARGS.scorer)
+
+    if ARGS.devicename:
+        device_id = get_device_id_by_name(ARGS.devicename)
+        if ARGS.device:
+            if device_id != ARGS.device:
+                print("The device ID os not the same as the mentioned device name")
+        else:
+            ARGS.device = device_id
 
     # Start audio with VAD
     vad_audio = VADAudio(aggressiveness=ARGS.vad_aggressiveness,
@@ -247,6 +263,8 @@ if __name__ == '__main__':
                         help=f"Input device sample rate. Default: {DEFAULT_SAMPLE_RATE}. Your device may require 44100.")
     parser.add_argument('-k', '--keyboard', action='store_true',
                         help="Type output through system keyboard")
+    parser.add_argument('-dn', '--devicename', default=None,
+                        help="Device input name as listed by pyaudio.PyAudio.get_device_info_by_index(). If not provided, falls back to PyAudio.get_default_device().")
     ARGS = parser.parse_args()
     if ARGS.savewav: os.makedirs(ARGS.savewav, exist_ok=True)
     main(ARGS)
