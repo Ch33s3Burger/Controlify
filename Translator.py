@@ -11,7 +11,7 @@ class Translator:
 
     def create_tree(self):
         root = Node('')
-        with open('config/translator_config.json') as translator_config:
+        with open('C:/Users/Benno/PycharmProjects/Controlify/config/translator_config.json') as translator_config:
             data = json.load(translator_config)
             self.recursive(root, data)
         return root
@@ -24,19 +24,22 @@ class Translator:
                     self.recursive(new_node, data[data_point])
                     node.child.append(new_node)
 
-    def evaluate_words(self, words):
-        evaluation_tree = None
-        for word in words.split(' '):
-            if evaluation_tree is None:
-                evaluation_tree = self.tree.get_child(word)
-            else:
-                evaluation_tree = evaluation_tree.get_child(word)
-        try:
-            eval(evaluation_tree.get_command())
-        except NameError:
-            print(f"The configured command: {evaluation_tree.get_command()} in 'translator_config.json' is not imported")
+    def evaluate_text(self, text):
+        if text is not None and text != '':
+            evaluation_tree = None
+            for word in text.split(' '):
+                if evaluation_tree is None:
+                    evaluation_tree = self.tree.get_child(word)
+                else:
+                    evaluation_tree = evaluation_tree.get_child(word)
+                if evaluation_tree is None:
+                    return
+            try:
+                eval(evaluation_tree.get_command())
+            except NameError:
+                print(f"The configured command: {evaluation_tree.get_command()} in 'translator_config.json' is not imported")
 
 
 if __name__ == '__main__':
     translator = Translator()
-    translator.evaluate_words("stop music")
+    translator.evaluate_text("stop music")
