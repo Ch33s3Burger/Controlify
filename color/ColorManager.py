@@ -1,4 +1,3 @@
-
 from threading import Thread
 
 from gpiozero import LED
@@ -23,10 +22,10 @@ power.on()
 
 class ColorManager(Thread):
 
-    def __init__(self):
+    def __init__(self, color_name='red'):
         super().__init__()
         self.driver = APA102(num_led=12)
-        self.color = COLORS_RGB['red']
+        self.color = COLORS_RGB[color_name]
         for i in range(12):
             self.driver.set_pixel(i, self.color[0], self.color[1], self.color[2])
 
