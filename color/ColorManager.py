@@ -24,13 +24,11 @@ class ColorManager(Thread):
 
     def __init__(self, color_name='red'):
         super().__init__()
-        self.driver = APA102(num_led=12)
+        self.driver = APA102(count=12)
         self.color = COLORS_RGB[color_name]
         for i in range(12):
             self.driver.set_pixel(i, self.color[0], self.color[1], self.color[2])
 
     def run(self):
+        print('show colors')
         self.driver.show()
-
-    def __del__(self):
-        self.driver.clear_strip()
