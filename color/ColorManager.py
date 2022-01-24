@@ -27,6 +27,7 @@ class ColorManager(Thread):
         self.driver = APA102(count=12)
         self.color = COLORS_RGB[color_name]
         self.turned_on = False
+        self.set_color(0, 0, 0)
 
     def lights_on(self):
         if self.turned_on is False:

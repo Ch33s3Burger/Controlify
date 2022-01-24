@@ -202,6 +202,7 @@ def main(ARGS):
 
     translator = Translator()
     color_manager = ColorManager()
+    color_manager.run()
 
     # Stream from microphone to DeepSpeech using VAD
     spinner = None
@@ -213,7 +214,7 @@ def main(ARGS):
         if frame is not None:
             if spinner:
                 spinner.start()
-                color_manager.run()
+                color_manager.turned_on()
             logging.debug("streaming frame")
             stream_context.feedAudioContent(np.frombuffer(frame, np.int16))
             if ARGS.savewav: wav_data.extend(frame)
