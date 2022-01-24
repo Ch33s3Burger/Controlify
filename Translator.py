@@ -26,20 +26,29 @@ class Translator:
 
     def evaluate_text(self, text):
         if text is not None and text != '':
-            evaluation_tree = None
-            for word in text.split(' '):
-                if evaluation_tree is None:
-                    evaluation_tree = self.tree.get_child(word)
-                else:
-                    evaluation_tree = evaluation_tree.get_child(word)
-                if evaluation_tree is None:
-                    return
-            try:
-                eval(evaluation_tree.get_command())
-            except NameError:
-                print(f"The configured command: {evaluation_tree.get_command()} in 'translator_config.json' is not imported")
+            evaluation_tree = self.tree
+            words = text.split(' ')
+            command_found = False
+            for word in words:
+                child = evaluation_tree.get_child(word)
+                if child is not None:
+                    evaluation_tree = child
+                    command_found = True
+                elif child is None and command_found is True:
+                    execute_command(evaluation_tree.get_command())
+                    evaluation_tree = self.tree
+            if evaluation_tree is not self.tree:
+                execute_command(evaluation_tree.get_command())
+
+
+def execute_command(command):
+    try:
+        eval(command)
+    except NameError:
+        print(
+            f"The configured command: {command} in 'translator_config.json' is not imported")
 
 
 if __name__ == '__main__':
     translator = Translator()
-    translator.evaluate_text("stop music")
+    translator.evaluate_text("hello stop music")
