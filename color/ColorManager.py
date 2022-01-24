@@ -26,9 +26,19 @@ class ColorManager(Thread):
         super().__init__()
         self.driver = APA102(count=12)
         self.color = COLORS_RGB[color_name]
-        for i in range(12):
-            self.driver.set_pixel(i, self.color[0], self.color[1], self.color[2])
+        self.turned_on = False
 
-    def run(self):
-        print('show colors')
+    def lights_on(self):
+        if self.turned_on is False:
+            self.set_color(self.color[0], self.color[1], self.color[2])
+            self.driver.show()
+            self.turned_on = True
+
+    def light_off(self):
+        self.set_color(0, 0, 0)
         self.driver.show()
+        self.turned_on = False
+
+    def set_color(self, r, g, b):
+        for i in range(12):
+            self.driver.set_pixel(i, r, g, b)

@@ -220,7 +220,7 @@ def main(ARGS):
         else:
             if spinner:
                 spinner.stop()
-                color_manager = ColorManager()
+                color_manager.light_off()
             logging.debug("end utterence")
             if ARGS.savewav:
                 vad_audio.write_wav(
