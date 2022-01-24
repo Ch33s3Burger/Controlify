@@ -15,6 +15,7 @@ from scipy import signal
 from word2number import w2n
 
 from Translator import Translator
+from color.ColorManager import ColorManager
 
 logging.basicConfig(level=20)
 
@@ -200,6 +201,7 @@ def main(ARGS):
     frames = vad_audio.vad_collector()
 
     translator = Translator()
+    color_manager = ColorManager()
 
     # Stream from microphone to DeepSpeech using VAD
     spinner = None
@@ -209,12 +211,16 @@ def main(ARGS):
     wav_data = bytearray()
     for frame in frames:
         if frame is not None:
-            if spinner: spinner.start()
+            if spinner:
+                spinner.start()
+                color_manager.run()
             logging.debug("streaming frame")
             stream_context.feedAudioContent(np.frombuffer(frame, np.int16))
             if ARGS.savewav: wav_data.extend(frame)
         else:
-            if spinner: spinner.stop()
+            if spinner:
+                spinner.stop()
+                color_manager = ColorManager()
             logging.debug("end utterence")
             if ARGS.savewav:
                 vad_audio.write_wav(
