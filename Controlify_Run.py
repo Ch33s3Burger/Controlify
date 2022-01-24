@@ -214,7 +214,7 @@ def main(ARGS):
         if frame is not None:
             if spinner:
                 spinner.start()
-                color_manager.turned_on()
+                color_manager.lights_on()
             logging.debug("streaming frame")
             stream_context.feedAudioContent(np.frombuffer(frame, np.int16))
             if ARGS.savewav: wav_data.extend(frame)
