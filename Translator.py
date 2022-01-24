@@ -11,7 +11,7 @@ class Translator:
 
     def create_tree(self):
         root = Node('')
-        with open('C:/Users/Benno/PycharmProjects/Controlify/config/translator_config.json') as translator_config:
+        with open('./config/translator_config.json') as translator_config:
             data = json.load(translator_config)
             self.recursive(root, data)
         return root
